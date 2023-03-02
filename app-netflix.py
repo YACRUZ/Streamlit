@@ -38,7 +38,7 @@ def load_data_byname(name):
     doc = codecs.open('movies.csv','rU','latin1')
     data = pd.read_csv(doc) #read CSV
     filtered_data_byname = data[data["name"].str.contains(name)]
-    return filtered_data_byname 
+    return filtered_data_byname
 
 myname = sidebar.text_input("Titulo del filme: ")
 if(myname):
@@ -53,5 +53,24 @@ if(btfilm):
 
 
 
+
+#selected box
+@st.cache_data
+def load_data_bydir(direct):
+    doc = codecs.open('movies.csv','rU','latin1')
+    data = pd.read_csv(doc) #read CSV
+    filtered_data_bydir = data[data['director'] == direct]
+
+    return filtered_data_bydir
+
+selected_sex =sidebar.selectbox('Seleccionar director ', data['director'].unique())
+btndirector = sidebar.button('filtrar')
+
+if(btndirector):
+    filterbysex =load_data_bydir(selected_sex)
+    count_row = filterbysex.shape[0]
+    st.write(f"Total items: {count_row}")
+
+    st.dataframe(filterbysex)
 
 
