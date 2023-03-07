@@ -30,9 +30,6 @@ if agree:
 
 
 
-
-
-
 @st.cache_data
 def load_data_byname(name):
     doc = codecs.open('movies.csv','rU','latin1')
